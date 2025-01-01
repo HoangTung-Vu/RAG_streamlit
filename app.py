@@ -1,4 +1,7 @@
 import streamlit as st
+__import__('pysqlite3') 
+import sys 
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import os
 import tempfile
 from dotenv import load_dotenv
@@ -9,6 +12,7 @@ from rag_utils import (
     initialize_llm,
     create_rag_chain
 )
+
 
 # Load environment variables
 load_dotenv()
