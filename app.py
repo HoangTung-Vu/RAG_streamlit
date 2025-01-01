@@ -1,5 +1,7 @@
 import streamlit as st
 import os
+import tempfile
+from dotenv import load_dotenv
 from rag_utils import (
     load_and_split_pdf,
     initialize_embedding_model,
@@ -7,8 +9,6 @@ from rag_utils import (
     initialize_llm,
     create_rag_chain
 )
-import tempfile
-from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
