@@ -18,7 +18,7 @@ from rag_utils import (
 load_dotenv()
 
 def main():
-    st.title("RAG with Streamlit and Gemini")
+    st.title("Your RAG Assistant")
 
     # Initialize session state
     if 'vectorstore_created' not in st.session_state:
@@ -29,7 +29,7 @@ def main():
         st.session_state.uploaded_file_name = None
 
     # File upload
-    uploaded_file = st.file_uploader("Upload a PDF document", type=['pdf'])
+    uploaded_file = st.file_uploader("Tải tài liệu PDF lên (nhớ định dạng pdf và file text nhé)", type=['pdf'])
 
     if uploaded_file is not None:
         # Check if a new file has been uploaded
@@ -44,8 +44,8 @@ def main():
             tmp_file.write(uploaded_file.getvalue())
             temp_file_path = tmp_file.name
 
-        if st.button("Process Document"):
-            with st.spinner("Processing document..."):
+        if st.button("Xử lý tài liệu"):
+            with st.spinner("Đang xử lý tài liệu..."):
                 # Initialize embedding model
                 embedding_model = initialize_embedding_model()
 
@@ -65,17 +65,17 @@ def main():
                 # Create a new vector store
                 st.session_state.vectorstore = get_vector_store(docs, embedding_model)
                 st.session_state.vectorstore_created = True
-                st.success("Document processed successfully!")
+                st.success("Lưu trữ tài liệu thành công!")
 
             # Clean up temporary file
             os.unlink(temp_file_path)
 
     # Question input and answer generation
     if st.session_state.vectorstore_created:
-        question = st.text_input("Ask a question about the document:")
+        question = st.text_input("Đặt câu hỏi:")
 
         if question:
-            with st.spinner("Generating answer..."):
+            with st.spinner("Đang nghĩ..."):
                 retriever = st.session_state.vectorstore.as_retriever(
                     search_type="similarity",
                     search_kwargs={"k": 10}
@@ -94,7 +94,7 @@ def main():
                 rag_chain = create_rag_chain(retriever, llm, system_prompt)
 
                 response = rag_chain.invoke({"input": question})
-                st.write("Answer:", response['answer'])
+                st.write("Câu trả lời:", response['answer'])
 
 if __name__ == "__main__":
     main()
