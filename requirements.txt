@@ -5,3 +5,4 @@ langchain-google-genai>=0.0.5
 chromadb>=0.4.22
 python-dotenv>=1.0.0
 pypdf>=3.17.0
+langchain[all]
