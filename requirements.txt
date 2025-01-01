@@ -17,3 +17,4 @@ langsmith==0.2.3
 pypdf==5.1.0
 PyPDF2==3.0.1
 python-dotenv
+db-sqlite3
