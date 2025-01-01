@@ -1,10 +1,9 @@
 streamlit
-python-dotenv
 langchain
 langchain-community
 langchain-google-genai
-chromadb
-pypdf
-google-generativeai
 langchain-chroma
-langchain-openai
+chromadb
+PyPDF2
+google-auth
+google-auth-oauthlib
