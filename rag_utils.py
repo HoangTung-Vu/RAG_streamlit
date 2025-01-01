@@ -17,7 +17,7 @@ def initialize_embedding_model(model="models/text-embedding-004"):
     return GoogleGenerativeAIEmbeddings(model=model)
 
 def get_vector_store(docs=None, embedding_model=None, persist_dir="chroma_db"):
-    if os.path.exists(persist_dir):
+    if os.path.exists(persist_dir) and docs is None:
         return Chroma(
             persist_directory=persist_dir,
             embedding_function=embedding_model
@@ -32,8 +32,8 @@ def get_vector_store(docs=None, embedding_model=None, persist_dir="chroma_db"):
 
 def initialize_llm(model="gemini-1.5-pro", temperature=0.3, max_tokens=5000):
     return ChatGoogleGenerativeAI(
-        model=model, 
-        temperature=temperature, 
+        model=model,
+        temperature=temperature,
         max_tokens=max_tokens
     )
 
